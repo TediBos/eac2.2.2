@@ -2,6 +2,16 @@ from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium.webdriver.firefox.webdriver import WebDriver
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.by import By
+from django.db import models
+from django.forms import ModelForm
+
+class Author(models.Model):
+    name =models.CharField(max_length=100)
+
+class Book(models.Model):
+    author = models.ForeignKey(Author, on_delete=models.CASCADE)
+    title = models.CharField(max_length=100)
+
  
 class MySeleniumTests(StaticLiveServerTestCase):
     # carregar una BD de test
